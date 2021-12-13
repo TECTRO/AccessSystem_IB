@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="AccessSystem_IB.Pages.UserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:AccessSystem_IB.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="UserPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+    Loaded="UserPage_OnLoaded"
+    
+    mc:Ignorable="d" Unloaded="Page_Unloaded">
+    <Grid>
+        <Button
+            Width="NaN"
+            Height="NaN"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Click="ButtonBase_OnClick"
+            Cursor="Hand"
+            Style="{StaticResource MaterialDesignFlatButton}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    FontSize="60"
+                    FontWeight="Bold"
+                    Foreground="DarkViolet"
+                    Text="Привет " />
+                <TextBlock
+                    x:Name="UserBlock"
+                    d:Text="dfsdfxXXxx"
+                    FontSize="60"
+                    FontWeight="Bold"
+                    Foreground="DarkViolet"
+                    Text="{Binding Data.CurrentUser.Login}" />
+                <TextBlock
+                    FontSize="60"
+                    FontWeight="Bold"
+                    Foreground="DarkViolet"
+                    Text="!" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>
