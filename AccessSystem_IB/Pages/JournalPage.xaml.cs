@@ -93,7 +93,22 @@ namespace AccessSystem_IB.Pages
         {
             using StreamWriter fs = new StreamWriter(new FileStream(Directory.GetCurrentDirectory() + "\\temp.txt", FileMode.OpenOrCreate));
             fs.Flush();
-            fs.Write(JsonSerializer.Serialize(JournalList));
+            fs.Write(JsonSerializer.Serialize(JournalList.Select(entry => new JournalEntry
+            {
+                User = new User
+                {
+                    Login = entry?.User?.Login,
+                    Password = entry?.User?.Password, 
+                    Role = entry?.User?.Role??Roles.User,
+                    AuthStory = new List<UserAuthInfo>(), 
+                    JournalEntries = new List<JournalEntry>()
+                },
+                Date = entry?.Date??DateTime.Now,
+                EventDescription = entry?.EventDescription,
+                EventType = entry?.EventType??JournalEvent.UserAnyAction,
+                Id = entry?.Id??0,
+                WorkstationName = entry?.WorkstationName
+            })));
             using FileStream targetStream = File.Create($"{Directory.GetCurrentDirectory()}\\{DateTime.Now.ToString(CultureInfo.InvariantCulture).Replace('.', '_').Replace(':', '_').Replace('/', '_')}.gz");
             using GZipStream gz = new GZipStream(targetStream, CompressionMode.Compress);
             fs.BaseStream.CopyTo(gz);
